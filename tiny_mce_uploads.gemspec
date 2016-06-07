@@ -5,6 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{tiny_mce_uploads}
+  s.authors = %q{onedesing 1000ideas krzysztof@1000i.pl}
   s.version = "0.2.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
