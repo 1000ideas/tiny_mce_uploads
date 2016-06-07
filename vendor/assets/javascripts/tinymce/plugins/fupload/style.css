@@ -1,0 +1,50 @@
+#notice { color: #7A9F45; font-weight: bold;margin-bottom: 10px; }
+
+#insert {
+  float: right;
+}
+
+#uploadPanel {
+    width: 530px;
+    padding: 10px;
+    background: white;
+    border: 1px solid black;
+}
+
+#uploadPanel:after {
+  content: ' ';
+  display: block;
+  clear: both;
+}
+
+#uploadPanel p {
+    margin: 0;
+    padding: 0;
+}
+#browserPanel {
+    margin: 5px 0 0 0;
+    overflow: auto;
+    width: 550px;
+    height: 270px;
+    background: white;
+    border: 1px solid black;
+}
+#browserPanel .element {
+    float: left;
+    padding: 5px;
+    margin: 10px;
+    width: 235px;
+    height: 70px;
+    border: 1px solid black;
+}
+
+#browserPanel .element img {
+    float: left;
+}
+
+#browserPanel .element a {
+    float: left;
+    padding: 0 0 0 5px;
+    height: 12px;
+    width: 75%;
+}

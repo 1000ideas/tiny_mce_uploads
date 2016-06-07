@@ -16,5 +16,13 @@ class TinyMceUploadsGenerator < Rails::Generators::Base
   def create_migration_file
     migration_template 'migration.rb', 'db/migrate/create_attachments.rb'
   end
+
+  def copy_themes_file
+    copy_file "../../../../config/tiny_mce_themes.yml", "config/tiny_mce_themes.yml" 
+  end
+
+  def add_routes
+    route 'tinymce_upload'
+  end
 end
 

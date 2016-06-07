@@ -1,0 +1,48 @@
+<%# encoding: utf-8 %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Wybierz obrazek</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/> 
+    <%= javascript_include_tag 'tinymce/plugins/fupload/functions' %>
+    <%= stylesheet_link_tag 'tinymce/plugins/fupload/style' %>
+  </head>
+
+  <body>
+
+    <p id="notice"><%= flash[:notice] %></p>
+    <%= form_tag attachment_upload_path, :multipart => true, :id => 'uploadPanel' do |f| %>
+
+      <p>
+        <input type="file" name="attachment[upload]"/> 
+        <input type="submit" id="insert" value="Wgraj" />
+      </p>
+    <% end %>
+    <div id="browserPanel">
+      <% @photos.each do |file|  %>
+        <% if file.image? %>
+          <div class='element'>
+            <%= image_tag file.upload.url(:thumb) %>
+            <%= link_to t('destroy'), attachment_delete_path(id: file.id) %>
+            <a href='javascript: doInsert("<%= file.upload.url(:original) %>");'>Maksymalny (szer. 650px)</a>
+            <a href='javascript: doInsert("<%= file.upload.url(:large) %>");'>Duży (300x300)</a>
+            <a href='javascript: doInsert("<%= file.upload.url(:small) %>");'>Średni (100x100)</a>
+            <a href='javascript: doInsert("<%= file.upload.url(:thumb) %>");'>Mały (50x50)</a>
+          </div>
+        <% else %>
+          <div class='element'>
+            <%= image_tag 'tinymce/plugins/fupload/img/icon.png' %>
+            <span><%= file.upload_file_name %></span><br />
+            <%= link_to t('destroy'), attachment_delete_path(id: file.id) %>
+            <a href='javascript: doInsertLink("<%= file.upload.url(:original) %>", "<%= file.upload_file_name %>");'>Wstaw</a>
+         </div>
+        <% end %>
+
+      <% end %>
+    </div>
+    <div class="mceActionPanel">
+      <div style="float: right">
+        <input type="button" id="cancel" name="cancel" value="Zamknij" onclick="tinyMCEPopup.close();" />
+      </div>
+    </div>
+  </body>
