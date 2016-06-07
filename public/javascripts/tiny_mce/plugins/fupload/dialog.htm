@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Wybierz obrazek</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"/> 
+	<script type="text/javascript" src="../../tiny_mce_popup.js"></script>
+	<script type="text/javascript" src="../../utils/mctabs.js"></script>
+	<script type="text/javascript" src="../../utils/form_utils.js"></script>
+	<script type="text/javascript" src="../../../jquery.js"></script>
+        <script type="text/javascript" src="./functions.js"></script>
+        <script type="text/javascript">
+            $(function(){
+                $.getJSON('/tiny_mce_uploads/attachments/list.json', {}, function(data){
+                    $(data).each(function(i,el){
+                        $('#browserPanel').prepend("<div class='element'>\n\
+            <img src='"+el.thumb+"' />\n\
+            <a href='/tiny_mce_uploads/attachments/delete?path="+el.thumb+"'>Usuń</a><br />\n\
+            <a href='javascript: doInsert(\""+el.original+"\");'>Oryginalny</a>\n\
+            <a href='javascript: doInsert(\""+el.large+"\");'>Duży (300x300)</a>\n\
+            <a href='javascript: doInsert(\""+el.small+"\");'>Średni (100x100)</a>\n\
+            <a href='javascript: doInsert(\""+el.thumb+"\");'>Mały (50x50)</a>\n\
+            </div>")
+                    });
+                });
+            });
+        </script>
+	<link href="./style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <form id="uploadPanel" action="/tiny_mce_uploads/attachments/upload" method="post" enctype="multipart/form-data">
+        <p>
+            <input type="file" name="attachment[upload]"/> 
+            <input type="submit" value="Wgraj" />
+        </p>
+    </form>
+    <div id="browserPanel">
+        
+    </div>
+    <div class="mceActionPanel">
+      <div style="float: left">
+        <input type="button" id="insert" name="insert" value="{#insert}" onclick="parse();" />
+      </div>
+
+      <div style="float: right">
+        <input type="button" id="cancel" name="cancel" value="{#cancel}" onclick="tinyMCEPopup.close();" />
+      </div>
+    </div>
+</body>

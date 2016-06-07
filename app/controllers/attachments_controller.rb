@@ -1,22 +1,26 @@
 AttachmentsController = Class.new(TinyMceUploads.attachments_controller_superclass_name.constantize) do
-  layout 'tiny_mce_uploads'
-
-  def new
-    @attachment = Attachment.new
-  end
-
-  def create
-    @attachment = Attachment.new(params[:attachment])
-    @attachment.save!
-
-    @insertion_string = if @attachment.image?
-      %Q[<img src="#{@attachment.upload.url(:original)}">]
-    else
-      %Q[<a href="#{@attachment.upload.url}">Download #{@attachment.upload_file_name}</a>]
+  layout false
+  def list
+    photos = Attachment.all.collect{|tp| { :large => tp.upload.url(:large), 
+                                             :small => tp.upload.url(:small), 
+                                             :thumb => tp.upload.url(:thumb), 
+                                             :original => tp.upload.url } }
+    respond_to do |format|
+      format.json { render :json => photos }
+      format.xml { render :xml => photos }
     end
-
-    render :layout => false
-  rescue ActiveRecord::RecordInvalid => e
-    render :action => 'new'
+  end
+  
+  def upload
+    Attachment.create(params[:attachment])
+    redirect_to :back
+  end
+  
+  def delete
+    if current_user.has_role?(:admin)
+      params[:path] =~ /uploads\/([0-9]*)\//i
+      Attachment.find($1.to_i).destroy
+    end
+    redirect_to :back
   end
 end

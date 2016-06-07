@@ -10,5 +10,5 @@ module TinyMceUploads
   self.attachments_controller_superclass_name = "ApplicationController"
 
   mattr_accessor :only_allow_images
-  self.only_allow_images = false
+  self.only_allow_images = true
 end
