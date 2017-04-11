@@ -47,7 +47,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<dynamic_form>, ["~> 1.0.0"])
     else
       s.add_dependency(%q<tiny_mce>, ["~> 0.1.4"])
-      s.add_dependency(%q<rails>, ["~> 3.1"])
+      s.add_dependency(%q<rails>, ["~> 3.0.19"])
       s.add_dependency(%q<dynamic_form>, ["~> 1.0.0"])
     end
   else
