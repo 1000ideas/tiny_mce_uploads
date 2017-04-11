@@ -1,5 +1,5 @@
 module TinyMceUploads
-  
+  require 'tinymece-rails'
   require 'tiny_mce_uploads/engine'
   require 'tiny_mce_uploads/version'
   require 'tiny_mce_uploads/routes_helper'
